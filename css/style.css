@@ -1,4 +1,4 @@
-/* Starter styles — we'll build this out properly in Phase 1, Weeks 2-4 */
+/* Starter styles — Week 2: box model, selectors, specificity */
 
 body {
   font-family: system-ui, sans-serif;
@@ -18,8 +18,34 @@ main {
   padding: 1rem;
 }
 
+/* BOX MODEL: every element is content + padding + border + margin, in that
+   order working outward. Open DevTools on a <section> and look at the "Box
+   Model" diagram in the Styles panel to see these four layers on this exact box. */
 section {
   margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+/* CLASS SELECTOR (.section-title): starts with a dot, matches ANY element
+   with class="section-title" — reusable across many elements. This is what
+   the h2 in all three sections uses. */
+.section-title {
+  color: #2b6cb0;
+  border-bottom: 2px solid #2b6cb0;
+  padding-bottom: 0.25rem;
+  display: inline-block;
+}
+
+/* SPECIFICITY: this rule targets "an h2 inside #about" — an ID + an element,
+   which outweighs a plain class selector. So even though every h2 has
+   class="section-title" (blue), the About heading's color gets overridden
+   back to dark here, and ONLY the About heading. Try deleting this rule and
+   reloading to see the difference. */
+#about h2 {
+  color: #1a1a1a;
 }
 
 footer {
