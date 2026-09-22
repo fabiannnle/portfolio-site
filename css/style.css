@@ -52,9 +52,6 @@ section {
   display: inline-block;
 }
 
-#about h2 {
-  color: #1a1a1a;
-}
 
 /* GRID — replaces last week's flexbox for the card gallery. Flexbox is
    1-dimensional (great for a single row, like the nav above); Grid is
@@ -131,9 +128,6 @@ body.dark nav a {
   color: #7ab7ff;
 }
 
-body.dark #about h2 {
-  color: #e5e5e5;
-}
 
 #theme-toggle {
   border: 1px solid #ddd;
@@ -205,4 +199,28 @@ body.dark .form-field textarea {
   background: #2a2a2a;
   border-color: #444;
   color: #e5e5e5;
+}
+
+/* WEEK 10 — accessibility: a skip link, hidden until it receives keyboard
+   focus. Keyboard and screen-reader users otherwise have to tab through
+   the entire nav on every single page before reaching real content. */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #2b6cb0;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Fix: footer's gray (#666) was tuned for a light background and fails
+   contrast against dark mode's near-black background. */
+body.dark footer {
+  color: #999999;
 }

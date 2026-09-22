@@ -3,10 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Fabian's web developer portfolio — projects and skills, built with HTML, CSS, and JavaScript." />
     <title>Fabian — Web Developer</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <header>
       <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
       <h1>Fabian</h1>
@@ -18,7 +21,7 @@
       </nav>
     </header>
 
-    <main>
+    <main id="main-content">
       <section id="about">
         <h2 class="section-title">About</h2>
         <p>
@@ -47,7 +50,14 @@
 
       <section id="contact">
         <h2 class="section-title">Contact</h2>
-        <form id="contact-form" novalidate>
+        <form
+        id="contact-form"
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        novalidate
+      >
+        <input type="hidden" name="form-name" value="contact" />
           <div class="form-field">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" />

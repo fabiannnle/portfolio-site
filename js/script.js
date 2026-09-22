@@ -67,11 +67,6 @@ console.log(
 const contactForm = document.getElementById("contact-form");
 
 contactForm.addEventListener("submit", function (event) {
-  // preventDefault() stops the browser's default reaction to this event.
-  // For a form submit, the default is "reload the page and send the data
-  // somewhere" — we want to handle it with our own JS instead.
-  event.preventDefault();
-
   const nameInput = document.getElementById("name");
   const emailInput = document.getElementById("email");
   const messageInput = document.getElementById("message");
@@ -108,9 +103,11 @@ contactForm.addEventListener("submit", function (event) {
     isValid = false;
   }
 
-  if (isValid) {
-    successMessage.textContent =
-      "Thanks! This looks good — we'll connect this to a real backend service later so it actually sends.";
-    contactForm.reset();
+  // Only step in and stop the submission when something's wrong. If
+  // isValid is still true, we do nothing here — meaning the browser goes
+  // ahead with its normal behavior and actually submits the form to
+  // Netlify, which is what makes this form real now that it's deployed.
+  if (!isValid) {
+    event.preventDefault();
   }
 });
