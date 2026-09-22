@@ -224,3 +224,50 @@ body.dark .form-field textarea {
 body.dark footer {
   color: #999999;
 }
+
+/* WEEK 14 POLISH — implementing Fabian's own client-feedback translations:
+   card elevation, hover transitions, and a more deliberate, consistent feel. */
+
+section {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s ease;
+}
+
+.card {
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+nav a {
+  transition: color 0.2s ease;
+}
+
+#contact-form button {
+  transition: background-color 0.2s ease;
+}
+
+.form-field input,
+.form-field textarea {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: #2b6cb0;
+  outline: 2px solid #2b6cb0;
+  outline-offset: 1px;
+}
+
+body.dark section {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
