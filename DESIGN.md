@@ -137,7 +137,7 @@ The site is a photo editor's light table. Every screenshot of the work is a fram
 
 Density is editorial and unhurried. Large Bodoni Moda headlines sit at weight 400 with optical sizing, and Archivo carries every working word. Space comes from a 12-column grid with one fluid gutter and tall vh-based section breathing room. Depth comes only from overlap and parallax speed. The name overlaps the print, the film strip overlaps the margin, and prints drift at different rates. Nothing is lifted by a blurred shadow. Every image on the page goes through one WebGL print pipeline that develops it shadows-first, clips it like an easel blade, loupes it, tints it for the room, and dissolves it into the next frame.
 
-Motion has one orchestrated moment: the easel opens on the first print. Everything after that is tied to scroll or to the visitor's hand. Prints develop as they arrive, grease pencil draws itself around selects, and the contact sheet pins and pans.
+Motion has one orchestrated moment: the introduction sets itself line by line and a reel of frames develops beneath it. Everything after that is tied to scroll or to the visitor's hand. Prints develop as they arrive, grease pencil draws around the selects, and each contact-sheet strip steps along with its own arrows.
 
 **Key Characteristics:**
 - Two rooms, one layout: light-table tokens by default, darkroom tokens under `[data-theme="dark"]`.
@@ -159,7 +159,7 @@ The palette is neutral silver and paper with one chemical accent that changes wi
 - **Baryta Paper** (`paper`): the page, the masthead band and the viewer backdrop. The WebGL shader reads it too, so developing prints rise out of the page colour itself.
 - **Light-Table Sheet** (`sheet`): the contact-sheet surface under the pinned strips, one step brighter than the page. It is also the colour of the sprocket holes in the light theme.
 - **Fixer Ink** (`ink`): all primary text, the solid button, the cursor label, the range track and the loupe's barrel ring.
-- **Silver Midtone** (`ink-soft`): secondary text, captions, strip labels, spec terms, inactive sequence steps, field underlines at rest and the easel's ruler ticks.
+- **Silver Midtone** (`ink-soft`): secondary text, captions, strip labels, spec terms, inactive sequence steps and field underlines at rest.
 - **Hairline** (`rule`): every 1px divider. That covers spec and list tops, the footer top, the banded masthead's bottom rule, the sheet's outline and link underlines at rest.
 - **Film Base** (`film`): the film strips and the vertical strip in the hero.
 - **Edge Print** (`film-ink`): the frame numbers and arrows printed along the film edge.
@@ -185,7 +185,7 @@ The palette is neutral silver and paper with one chemical accent that changes wi
 **Character:** A magazine's Didone set large and light against a sturdy grotesque that does all the practical work. The serif speaks and the sans labels.
 
 ### Hierarchy
-- **Display** (400, `display` clamp, 0.86): the name across the foot of the first viewport, one line on desktop, overlapping the print's lower edge. It is used once.
+- **Display** (400, clamp(2.5rem, 6vw, 6.25rem), line height 1): the introduction in the first viewport, set to at most 11.5em wide. It is used once.
 - **Headline** (400, `headline` clamp, 0.95, balanced wrap): section and project titles.
 - **Title** (400, `title` clamp, 1.0): the viewer's project title.
 - **Deck** (Bodoni 400, `deck` clamp, 1.36, max 30ch, 36ch for the practice statement): the standfirst under each project title and the practice body paragraph.
@@ -208,7 +208,7 @@ Vertical rhythm comes from vh, not fixed pixels: `section` top padding of 22vh (
 
 The masthead is fixed at `header` height (64px, 56px below 900px). Full-height sections pad their tops by the header plus a few vh.
 
-Breakpoints: at 1100px the hero and sequence columns rebalance. At 899px everything stacks to full width, the easel and hero film strip are hidden, the name wraps, the sheet stops pinning and the sequence stops pinning. At 520px the masthead name shortens, the switch drops its word and spec rows stack.
+Breakpoints: at 1100px the hero lede and the sequence columns rebalance. At 899px everything stacks to full width, the header drops to 56px, and the Focus Timer sequence stops pinning. At 520px the masthead shortens the name to "Fabian G. A." and hides the switch label. Contact-sheet frames scale with clamp(120px, min(29vh, 52vw), 290px), so a frame always fits a phone screen.
 
 ## Elevation & Depth
 
@@ -221,7 +221,7 @@ The system is flat. Depth comes from overlap and from parallax speed, never from
 ### Named Rules
 **The Overlap Not Shadow Rule.** To bring something forward, overlap it or move it faster. No shadow has a blur radius above 0 or an offset above 1px.
 
-**The Fixed Grain Rule.** Grain lives at screen scale. A 180px noise tile covers the page (opacity 0.06 multiply, 0.08 screen in the darkroom, stepped at 6 frames over 1.2s), and the shader adds its own ±0.015 grain keyed to device pixels. Grain never scales with a print.
+**The Fixed Grain Rule.** Grain lives at screen scale and stays barely visible. A 180px noise tile covers the page at opacity 0.025 (multiply) by day and 0.018 (screen) in the darkroom, stepped at 6 frames over 1.2s. The shader adds ±0.006 per CSS pixel, so enlarging a print never enlarges its grain. The user asked for less grain, especially in the darkroom.
 
 ## Shapes
 
@@ -280,16 +280,19 @@ Every image with `data-gl` is a print: a DOM image that keeps its space and alt 
 - A full-screen enlargement on a `paper` backdrop. The print flies from its frame on the sheet (1.1s `expo.inOut`) and moves from mono to colour over 1.2s. The chrome fades in after 0.6s. It supports the keyboard (arrows, Escape, a focus trap) and typed frame numbers from anywhere on the page. Controls are text buttons.
 
 ### Motion grammar
-- **Easel opening (the only orchestrated moment):** the blades open horizontally (0.9s `expo.inOut`), then vertically (1.3s). The print develops over 2.6s. The name's letters rise out of word masks with a 0.028s stagger (1.5s `expo.out`). Then the offer, caption, easel and masthead fade in, and the frames on the hero strip develop.
+- **Introduction (the only orchestrated moment):** the intro's lines rise out of line masks (1.4s `expo.out`, 0.12s stagger). The lede, actions and masthead fade in from 0.7s, and the reel's frames develop in sequence from 0.9s. On scroll the reel drifts left by 18% of the viewport width.
 - **Prints developing:** the frames on the sheet develop once on arrival (2.2s, 0.07s stagger). Each enlargement's blade lifts from the top while it settles from 12% over-zoom and develops, all scrubbed across the band from 96% to 55% of the viewport.
 - **Grease pencil drawing itself:** `drawSVG` from 0 to 100% over 1.2 to 1.3s with `power2.inOut` as a select enters. On the pinned sheet a mark erases in 0.6s when its frame pans back out.
-- **Pinned sheet pan (900px and up, full motion):** the stage pins for 1.35× the longest travel. Every strip slides left at its own rate, so all of them reach their last frame together, while the sheet drifts up underneath. The scrub is 1.
+- **Contact sheet strips:** each strip is a horizontal scroll-snap roll. Its previous and next arrows step one frame at a time with smooth scrolling (instant under reduced motion) and disable at either end. Each strip develops as it enters view, then its select is marked.
 - **House ease:** `cubic-bezier(0.16, 1, 0.3, 1)` for CSS state changes. Lenis smooth scroll at a lerp of 0.09.
 
 ### Fallbacks
 - **Reduced motion:** no Lenis and no intro. Prints are developed and marks are drawn from the start. The sheet becomes horizontally scroll-snapped strips, the sequence stacks with the dissolve at 0s, the grain stops, the theme switch has no reveal, and CSS transitions are cut to 0.01ms.
 - **No WebGL** (or `?nogl`): the DOM images stay visible. A CSS stand-in reproduces clip as `clip-path: inset()`, develop as brightness and contrast, and zoom and shift as transforms. Monochrome frames use `grayscale(1) contrast(1.06)` and turn colour on hover instead of under a loupe.
 - **Phones (below 900px):** the sheet is static, with swipeable strips at a `--frame-h` of `min(44vw, 30vh)`. The instructions change from "Hover" to "Tap" and "Swipe".
+
+- **Tools list** (`.hero__stack`, `.stack`): a definition list in the first viewport, set in the same hairline-row grammar as the project specs. Terms are ink-soft at 0.9375rem, values are ink, and each row is bordered top and bottom by `rule`. It lists only tools used in the shipped work, with no proficiency bars or levels.
+- **Mobile menu** (`.menu-toggle`, `.menu`): below 900px the inline nav gives way to a two-line toggle that turns into a cross. It opens a full-screen paper sheet whose clip-path wipes down over 0.7s `expo.inOut`. Large Bodoni links rise out of masks, and the masthead drops its difference blend while the menu is open. Escape, a link, or a resize past 900px closes it, and the page is locked while it's open.
 
 ## Do's and Don'ts
 
@@ -303,9 +306,9 @@ Every image with `data-gl` is a print: a DOM image that keeps its space and alt 
 
 ### Don't:
 - **Don't** round a corner. Buttons, fields, frames, prints and labels are all 0px.
-- **Don't** use blurred or offset shadows, glass, or gradient fills. The only gradients allowed are the ones that draw sprockets and easel ticks.
+- **Don't** use blurred or offset shadows, glass, or gradient fills. The only gradients allowed are the ones that draw sprockets.
 - **Don't** show a frame in colour on the contact sheet at rest. Colour comes only from the loupe or the enlargement.
 - **Don't** use the condensed width or caps for anything except film-edge codes. Put no small uppercase labels above headings.
-- **Don't** add a second orchestrated intro. After the easel opens, motion follows scroll or the visitor's hand.
+- **Don't** add a second orchestrated intro. After the introduction sets, motion follows scroll or the visitor's hand.
 - **Don't** make the dark theme a different layout or add dark-only components. Change the light only.
 - **Don't** use glyph or icon-font icons. The lamp and the edge triangles are drawn in SVG and CSS.

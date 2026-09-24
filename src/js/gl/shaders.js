@@ -150,7 +150,7 @@ void main() {
 
   // Grain at a fixed on-screen size, independent of the print's scale.
   float g = hash(floor(gl_FragCoord.xy / uDpr) + floor(uTime * 12.0) * vec2(13.1, 7.7)) - 0.5;
-  c += g * 0.03;
+  c += g * 0.012;
 
   gl_FragColor = vec4(c * uAlpha, uAlpha);
 }

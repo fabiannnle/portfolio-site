@@ -14,8 +14,7 @@
     <meta property="og:description" content="Websites designed and built by hand, from first sketch to launch." />
     <meta property="og:image" content="/images/work/gl-desktop-lg.webp" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" as="image" href="/images/work/gl-desktop-lg.webp" fetchpriority="high" />
-    <script>
+        <script>
       try {
         var t = localStorage.getItem("theme");
         if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) {
@@ -53,53 +52,58 @@
         </svg>
         <span>Darkroom</span>
       </button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
     </header>
 
+    <div class="menu" id="site-menu" hidden>
+      <nav class="menu__links" aria-label="Menu">
+        <a href="#work"><span>Work</span></a>
+        <a href="#practice"><span>Practice</span></a>
+        <a href="#contact"><span>Contact</span></a>
+      </nav>
+      <p class="menu__foot">
+        <span>Fabian Ghani Affandi, web designer and developer</span>
+        <a class="textlink" href="https://github.com/fabiannnle" rel="me">GitHub</a>
+      </p>
+    </div>
+
     <main id="main">
-      <!-- First viewport: the easel -->
-      <section class="hero" id="top" aria-labelledby="hero-name">
-        <div class="hero__offer">
-          <p class="hero__lede">Websites, designed and built by hand.</p>
+      <!-- Introduction -->
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <h1 class="hero__intro" id="hero-title">Hi, I’m Fabian.<br /> I design and build websites by hand.</h1>
+        <div class="hero__more">
+          <p class="hero__lede">
+            I’m a web designer and developer. I take each site from the first sketch to launch: the layout,
+            the typography, the motion and the code, all in one pair of hands.
+          </p>
           <div class="hero__actions">
             <a class="button" href="#contact">Start a project</a>
             <a class="textlink" href="#work">See the work</a>
           </div>
         </div>
-
-        <figure class="hero__print">
-          <div class="easel" aria-hidden="true">
-            <span class="easel__rule easel__rule--top"></span>
-            <span class="easel__rule easel__rule--left"></span>
+        <section class="hero__stack" aria-labelledby="stack-title">
+          <h2 class="hero__stack-title" id="stack-title">Tools I build with</h2>
+          <dl class="stack">
+            <div><dt>Structure</dt><dd>HTML, JavaScript, React</dd></div>
+            <div><dt>Style</dt><dd>CSS, Tailwind CSS, responsive layouts</dd></div>
+            <div><dt>Motion</dt><dd>GSAP, ScrollTrigger, Lenis</dd></div>
+            <div><dt>WebGL</dt><dd>Three.js, GLSL shaders</dd></div>
+            <div><dt>Shipping</dt><dd>Vite, Git and GitHub, Netlify</dd></div>
+          </dl>
+        </section>
+        <div class="hero__reel" aria-hidden="true">
+          <div class="reel">
+            <span class="reel__frame" data-gl data-fit="cover" data-focus-y="1" data-mono><img src="/images/work/gl-desktop-sm.webp" width="1000" height="625" alt="" loading="lazy" decoding="async" /></span>
+            <span class="reel__frame" data-gl data-fit="cover" data-mono><img src="/images/work/ft-running-sm.webp" width="1000" height="708" alt="" loading="lazy" decoding="async" /></span>
+            <span class="reel__frame" data-gl data-fit="cover" data-mono><img src="/images/work/ra-desktop-sm.webp" width="1000" height="750" alt="" loading="lazy" decoding="async" /></span>
+            <span class="reel__frame" data-gl data-fit="contain" data-mono><img src="/images/work/gl-mobile-menu-sm.webp" width="351" height="760" alt="" loading="lazy" decoding="async" /></span>
+            <span class="reel__frame" data-gl data-fit="cover" data-mono><img src="/images/work/ft-break-sm.webp" width="1000" height="708" alt="" loading="lazy" decoding="async" /></span>
+            <span class="reel__frame" data-gl data-fit="contain" data-mono><img src="/images/work/ra-skills-sm.webp" width="1000" height="367" alt="" loading="lazy" decoding="async" /></span>
+            <span class="reel__frame" data-gl data-fit="contain" data-mono><img src="/images/work/gl-testimonial-sm.webp" width="1000" height="389" alt="" loading="lazy" decoding="async" /></span>
+            <span class="reel__frame" data-gl data-fit="cover" data-mono><img src="/images/work/ft-desktop-sm.webp" width="1000" height="750" alt="" loading="lazy" decoding="async" /></span>
           </div>
-          <div class="print print--hero" data-gl data-fit="cover" data-hero>
-            <img
-              src="/images/work/gl-desktop-lg.webp"
-              width="2400"
-              height="1500"
-              alt="The GreenLeaf Cleaning Co. homepage: the headline “Spotless homes, every time” beside a photograph of dune grass by the sea."
-              fetchpriority="high"
-              decoding="async"
-            />
-          </div>
-          <figcaption class="caption">
-            Frame 1. GreenLeaf Cleaning Co., a concept landing page.
-          </figcaption>
-        </figure>
-
-        <h1 class="hero__name" id="hero-name">Fabian Ghani Affandi</h1>
-
-        <div class="hero__strip" aria-hidden="true">
-          <span class="film film--vertical">
-            <span class="film__frame" data-gl data-fit="cover" data-mono>
-              <img src="/images/work/ft-desktop-sm.webp" width="1000" height="750" alt="" loading="lazy" decoding="async" />
-            </span>
-            <span class="film__frame" data-gl data-fit="cover" data-mono>
-              <img src="/images/work/ra-desktop-sm.webp" width="1000" height="750" alt="" loading="lazy" decoding="async" />
-            </span>
-            <span class="film__frame" data-gl data-fit="contain" data-mono>
-              <img src="/images/work/gl-mobile-sm.webp" width="351" height="760" alt="" loading="lazy" decoding="async" />
-            </span>
-          </span>
         </div>
       </section>
 
@@ -108,15 +112,21 @@
         <div class="sheet__intro">
           <h2 class="sheet__title" id="sheet-title">Fourteen frames from three projects</h2>
           <p class="sheet__how">
-            <span class="for-pointer">Hover a frame to look through the loupe. Select it to see it large, or type its number.</span>
-            <span class="for-touch">Tap a frame to see it large. Swipe along a strip to see the rest of the roll.</span>
+            <span class="for-pointer">Hover a frame to look through the loupe. Use the arrows to move along a strip, and select a frame to see it large.</span>
+            <span class="for-touch">Swipe along a strip to see the rest of the roll, and tap a frame to see it large.</span>
           </p>
         </div>
 
         <div class="sheet__stage">
           <div class="sheet__track" data-gl-clip>
             <div class="strip" data-project="greenleaf">
-              <p class="strip__label">GreenLeaf Cleaning Co.</p>
+              <div class="strip__head">
+                <p class="strip__label">GreenLeaf Cleaning Co.</p>
+                <div class="strip__nav">
+                  <button class="strip__arrow" type="button" data-step="-1" aria-label="Previous frames of GreenLeaf Cleaning Co."><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4M9 5l-5 5 5 5" /></svg></button>
+                  <button class="strip__arrow" type="button" data-step="1" aria-label="Next frames of GreenLeaf Cleaning Co."><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" /></svg></button>
+                </div>
+              </div>
               <ol class="strip__frames" data-gl-clip>
                 <li class="strip__cell">
                   <button class="frame" type="button" data-frame="1" data-project="greenleaf" data-lg="/images/work/gl-desktop-lg.webp" data-caption="Homepage on desktop, with the quote button top right.">
@@ -164,7 +174,13 @@
             </div>
 
             <div class="strip" data-project="focus-timer">
-              <p class="strip__label">Focus Timer</p>
+              <div class="strip__head">
+                <p class="strip__label">Focus Timer</p>
+                <div class="strip__nav">
+                  <button class="strip__arrow" type="button" data-step="-1" aria-label="Previous frames of Focus Timer"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4M9 5l-5 5 5 5" /></svg></button>
+                  <button class="strip__arrow" type="button" data-step="1" aria-label="Next frames of Focus Timer"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" /></svg></button>
+                </div>
+              </div>
               <ol class="strip__frames" data-gl-clip>
                 <li class="strip__cell">
                   <button class="frame" type="button" data-frame="7" data-project="focus-timer" data-lg="/images/work/ft-desktop-lg.webp" data-caption="Ready to start a twenty-five minute focus session.">
@@ -198,7 +214,13 @@
             </div>
 
             <div class="strip" data-project="github-app">
-              <p class="strip__label">Profile and skills app</p>
+              <div class="strip__head">
+                <p class="strip__label">Profile and skills app</p>
+                <div class="strip__nav">
+                  <button class="strip__arrow" type="button" data-step="-1" aria-label="Previous frames of Profile and skills app"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H4M9 5l-5 5 5 5" /></svg></button>
+                  <button class="strip__arrow" type="button" data-step="1" aria-label="Next frames of Profile and skills app"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" /></svg></button>
+                </div>
+              </div>
               <ol class="strip__frames" data-gl-clip>
                 <li class="strip__cell">
                   <button class="frame" type="button" data-frame="11" data-project="github-app" data-lg="/images/work/ra-desktop-lg.webp" data-caption="A live GitHub profile above the skills list and form.">
@@ -344,12 +366,11 @@
       </section>
 
       <section class="practice" id="practice" aria-labelledby="practice-title">
-        <h2 class="practice__title" id="practice-title">I design and build websites by hand.</h2>
+        <h2 class="practice__title" id="practice-title">One person, from sketch to launch.</h2>
         <div class="practice__body">
           <p>
-            I’m Fabian Ghani Affandi, a web designer and developer. I take a site from the first conversation
-            to launch: structure, typography, motion, code and deployment, all in one pair of hands. That
-            means fewer handoffs, and a site that behaves the way it was designed.
+            Working with one person means fewer handoffs. The person who designs your site is the person who
+            builds it, so it behaves the way it was designed, on phones and desktops alike.
           </p>
           <div class="practice__cols">
             <div>

@@ -19,8 +19,8 @@ OWN-WORLD: The light table by day is cool baryta paper white (#F3F3F0), silver m
 
 STORY: Visitors see a print develop, recognise real interfaces as film frames, loupe and open them, read what each project does and how it was built, understand that this site is itself the demonstration, and leave an enquiry.
 
-FIRST VIEWPORT: An enlarger easel's blades open onto one print (GreenLeaf), which develops shadows-first in WebGL. "Fabian Ghani Affandi" sits in huge Bodoni across the bottom margin, overlapping the print's edge. A one-line offer and "Start a project" sit bottom-left. The next roll's film strip peeks in at the right edge. Minimal nav runs top-left, with a Darkroom switch top-right.
+FIRST VIEWPORT (revised on 2026-09-24 at the user's request): a short typographic introduction. "Hi, I’m Fabian. I design and build websites by hand." is set in large Bodoni, top-left, and its lines rise in on load. Beneath it sit a one-paragraph lede, "Start a project" and "See the work". A full-bleed film reel of monochrome frames runs along the bottom edge, develops on load and drifts left on scroll. There is no overlapping name and no easel print.
 
-FORM: The Contact Sheet, number 7 on the ordered list. Seed key 5dbc44dd. Signature interaction: a WebGL loupe over the frames, with keyboard frame addresses and a pinned sheet that pans under scroll. Motion grammar: the easel opens, prints develop, and grease pencil draws itself.
+FORM: The Contact Sheet, number 7 on the ordered list. Seed key 5dbc44dd. Signature interaction: a WebGL loupe over the frames, with keyboard frame addresses. Each strip scrolls on its own, with previous and next arrows; the sheet no longer pans with the page. Motion grammar: the introduction sets line by line, prints develop, and grease pencil draws itself.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

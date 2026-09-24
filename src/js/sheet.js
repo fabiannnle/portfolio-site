@@ -25,91 +25,58 @@ function drawMarks(sheet) {
   });
 }
 
-export function initSheet({ openFrame }) {
+// Each strip scrolls along its own roll; the arrows step one frame at a time.
+function initStripArrows(strip, reduce) {
+  const list = strip.querySelector(".strip__frames");
+  const nav = strip.querySelector(".strip__nav");
+  const [prev, next] = nav.querySelectorAll(".strip__arrow");
+
+  const step = () => {
+    const cell = list.querySelector(".strip__cell");
+    return cell.offsetWidth + (parseFloat(getComputedStyle(list).columnGap) || 0);
+  };
+  const update = () => {
+    const max = list.scrollWidth - list.clientWidth;
+    nav.hidden = max < 4;
+    prev.disabled = list.scrollLeft < 4;
+    next.disabled = list.scrollLeft > max - 4;
+  };
+  const move = (dir) => list.scrollBy({ left: dir * step(), behavior: reduce ? "auto" : "smooth" });
+
+  prev.addEventListener("click", () => move(-1));
+  next.addEventListener("click", () => move(1));
+  list.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+}
+
+export function initSheet({ openFrame, reduce }) {
   const sheet = document.querySelector(".sheet");
-  const stage = sheet.querySelector(".sheet__stage");
-  const track = sheet.querySelector(".sheet__track");
   const frames = [...sheet.querySelectorAll(".frame")];
-  const medias = frames.map((frame) => mediaOf(frame.querySelector("[data-gl]")));
   const marks = drawMarks(sheet);
 
   frames.forEach((frame) => frame.addEventListener("click", () => openFrame(Number(frame.dataset.frame), frame)));
+  sheet.querySelectorAll(".strip").forEach((strip) => initStripArrows(strip, reduce));
 
-  const mm = gsap.matchMedia();
-  mm.add(
-    {
-      pan: "(min-width: 900px) and (prefers-reduced-motion: no-preference)",
-      narrow: "(max-width: 899px)",
-      reduce: "(prefers-reduced-motion: reduce)",
-    },
-    (context) => {
-      const { pan, reduce } = context.conditions;
-      sheet.classList.toggle("sheet--static", !pan);
+  if (reduce) {
+    gsap.set(marks, { drawSVG: "100%" });
+    return;
+  }
 
-      if (reduce) {
-        medias.forEach((m) => (m.develop = 1));
-        gsap.set(marks, { drawSVG: "100%" });
-        return () => sheet.classList.remove("sheet--static");
-      }
-
-      medias.forEach((m) => (m.develop = 0));
-      ScrollTrigger.create({
-        trigger: stage,
-        start: "top 75%",
-        once: true,
-        onEnter: () => gsap.to(medias, { develop: 1, duration: 2.2, ease: "power1.inOut", stagger: 0.07 }),
-      });
-      gsap.set(marks, { drawSVG: "0%" });
-
-      if (!pan) {
-        marks.forEach((path) =>
-          gsap.to(path, {
-            drawSVG: "100%",
-            duration: 1.2,
-            ease: "power2.inOut",
-            scrollTrigger: { trigger: path.closest(".strip"), start: "top 70%" },
-          }),
-        );
-        return () => sheet.classList.remove("sheet--static");
-      }
-
-      // Each strip is drawn across the light table at its own pace, so every roll
-      // reaches its last frame together while the sheet drifts up beneath the pinned view.
-      const strips = [...track.querySelectorAll(".strip__frames")];
-      const inner = () => track.clientWidth - parseFloat(getComputedStyle(track).paddingLeft) * 2;
-      const travel = (strip) => Math.max(0, strip.scrollWidth - inner());
-      const top = () => parseFloat(getComputedStyle(track).top) || 0;
-      const dy = () => Math.max(0, track.offsetHeight + top() * 1.4 - stage.clientHeight);
-      const longest = () => Math.max(...strips.map(travel), dy(), 480);
-
-      const sheetPan = gsap.timeline({
-        defaults: { ease: "none", duration: 1 },
-        scrollTrigger: {
-          trigger: stage,
-          start: "top top",
-          end: () => `+=${longest() * 1.35}`,
-          pin: true,
-          scrub: 1,
-          invalidateOnRefresh: true,
-          anticipatePin: 1,
-          onUpdate: drawVisibleMarks,
-        },
-      });
-      strips.forEach((strip) => sheetPan.to(strip, { x: () => -travel(strip) }, 0));
-      sheetPan.to(track, { y: () => -dy() }, 0);
-
-      const drawn = new Set();
-      function drawVisibleMarks() {
-        const edge = stage.clientWidth * 0.8;
-        marks.forEach((path) => {
-          const inView = path.closest(".strip__cell").getBoundingClientRect().left < edge;
-          if (inView === drawn.has(path)) return;
-          if (inView) drawn.add(path);
-          else drawn.delete(path);
-          gsap.to(path, { drawSVG: inView ? "100%" : "0%", duration: inView ? 1.3 : 0.6, ease: "power2.inOut" });
-        });
-      }
-      ScrollTrigger.create({ trigger: stage, start: "top 60%", once: true, onEnter: drawVisibleMarks });
-    },
-  );
+  // Each roll develops as it comes into view, then its select is marked.
+  gsap.set(marks, { drawSVG: "0%" });
+  sheet.querySelectorAll(".strip").forEach((strip) => {
+    const medias = [...strip.querySelectorAll(".frame [data-gl]")].map(mediaOf);
+    const stripMarks = marks.filter((path) => strip.contains(path));
+    medias.forEach((m) => (m.develop = 0));
+    ScrollTrigger.create({
+      trigger: strip,
+      start: "top 80%",
+      once: true,
+      onEnter: () => {
+        gsap.to(medias, { develop: 1, duration: 2, ease: "power1.inOut", stagger: 0.1 });
+        gsap.to(stripMarks, { drawSVG: "100%", duration: 1.3, ease: "power2.inOut", delay: 1 });
+      },
+    });
+  });
 }

@@ -18,6 +18,7 @@ import { initSpreads } from "./js/spreads.js";
 import { initViewer } from "./js/viewer.js";
 import { initCursor } from "./js/cursor.js";
 import { initForm } from "./js/form.js";
+import { initMenu } from "./js/menu.js";
 
 gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, SplitText);
 
@@ -50,10 +51,11 @@ paintGrain();
 
 const viewer = initViewer({ reduce, stage, lock: lockScroll });
 initHero({ reduce });
-initSheet({ openFrame: viewer.open });
+initSheet({ openFrame: viewer.open, reduce });
 initSpreads({ reduce });
 initCursor();
 initForm();
+initMenu({ lock: lockScroll, reduce });
 initMasthead();
 
 // Past the hero the masthead gets a paper band, and it steps aside while you read downward.
@@ -62,6 +64,10 @@ function initMasthead() {
   let last = window.scrollY;
   const update = () => {
     const y = window.scrollY;
+    if (head.classList.contains("is-menu")) {
+      last = y;
+      return;
+    }
     const banded = y > window.innerHeight * 0.8;
     head.classList.toggle("is-banded", banded);
     if (!banded || y < last - 4) head.classList.remove("is-hidden");
