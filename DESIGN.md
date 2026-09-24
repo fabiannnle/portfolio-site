@@ -202,13 +202,13 @@ The palette is neutral silver and paper with one chemical accent that changes wi
 
 ## Layout
 
-A 12-column grid (`repeat(12, minmax(0, 1fr))`) with a single fluid `gutter` token as both column gap and page margin. The hero, sheet intro, spreads, sequence, colophon, practice and contact all use this grid. Placement is deliberately asymmetric. In the hero the offer takes columns 1 to 4 and the print 5 to 12. The GreenLeaf head takes 1 to 6 with the phone pair at 8 to 12. The Focus Timer print takes 1 to 7 with the text at 9 to 12. The contact head takes 1 to 5 with the form at 7 to 12.
+A 12-column grid (`repeat(12, minmax(0, 1fr))`) with a single fluid `gutter` token as both column gap and page margin. The hero, sheet intro, spreads, sequence, colophon, practice and contact all use this grid. Placement is deliberately asymmetric. In the hero the offer takes columns 1 to 4 and the print 5 to 12. The Aldergrove Hours head takes 1 to 7 with its spec at 9 to 12. The workflow sequence print takes 1 to 7 with the text at 9 to 12. The role rows alternate a print (7 columns) with text (4 columns), and the build section puts the facts at 1 to 7 beside the payslip PDF at 9 to 12. The contact head takes 1 to 5 with the form at 7 to 12.
 
 Vertical rhythm comes from vh, not fixed pixels: `section` top padding of 22vh (16vh below 900px), 18vh before the sheet and the sequence, and 24vh / 16vh around contact. Component gaps come from a short pixel set: 6, 16, 24, 28 and 48px.
 
 The masthead is fixed at `header` height (64px, 56px below 900px). Full-height sections pad their tops by the header plus a few vh.
 
-Breakpoints: at 1100px the hero lede and the sequence columns rebalance. At 899px everything stacks to full width, the header drops to 56px, and the Focus Timer sequence stops pinning. At 520px the masthead shortens the name to "Fabian G. A." and hides the switch label. Contact-sheet frames scale with clamp(120px, min(29vh, 52vw), 290px), so a frame always fits a phone screen.
+Breakpoints: at 1100px the hero lede and the sequence columns rebalance. At 899px everything stacks to full width, the header drops to 56px, and the workflow sequence stops pinning. At 520px the masthead shortens the name to "Fabian G. A." and hides the switch label. Contact-sheet frames scale with clamp(120px, min(29vh, 52vw), 290px), so a frame always fits a phone screen.
 
 ## Elevation & Depth
 

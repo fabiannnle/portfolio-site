@@ -9,7 +9,7 @@ related_targets: []
 
 Scope: the whole single-page portfolio, including the project enlargement view. Visitor mode: Experience, with a Persuade close. The work leads, and the contact form closes the page.
 
-Audience: prospective clients who need a website. Job: judge Fabian's craft in seconds, then get in touch. Proof: the three real projects (GreenLeaf concept, Focus Timer, GitHub/skills app) and this site itself. Constraints: honest labelling (GreenLeaf is a concept), no invented clients or metrics, Netlify form, dark mode, reduced motion.
+Audience: prospective clients who need a website. Job: judge Fabian's craft in seconds, then get in touch. Proof: Aldergrove Hours, a working timesheet and payroll app (github.com/fabiannnle/timesheet-site), shown as a case study, and this site itself. The earlier projects (GreenLeaf, Focus Timer, GitHub/skills app) are archived in a <template> while they're redesigned. Constraints: honest labelling (Aldergrove Freight Co. is fictional), no invented clients or metrics, Netlify form, dark mode, reduced motion.
 
 ## Direction contract
 

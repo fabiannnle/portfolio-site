@@ -3,6 +3,7 @@ import { mediaOf } from "./media.js";
 import { scrollToTarget } from "./scroll.js";
 
 const PROJECTS = {
+  "aldergrove-hours": { title: "Aldergrove Hours", href: "#aldergrove-hours" },
   greenleaf: { title: "GreenLeaf Cleaning Co.", href: "#greenleaf" },
   "focus-timer": { title: "Focus Timer", href: "#focus-timer" },
   "github-app": { title: "Profile and skills app", href: "#github-app" },
