@@ -3,86 +3,434 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Fabian's web developer portfolio — projects and skills, built with HTML, CSS, and JavaScript." />
-    <title>Fabian — Web Developer</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <title>Fabian Ghani Affandi, web designer and developer</title>
+    <meta
+      name="description"
+      content="Fabian Ghani Affandi designs and builds websites by hand: layout, typography, motion and WebGL, from first sketch to launch."
+    />
+    <meta name="theme-color" content="#F3F3F0" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#17120F" media="(prefers-color-scheme: dark)" />
+    <meta property="og:title" content="Fabian Ghani Affandi, web designer and developer" />
+    <meta property="og:description" content="Websites designed and built by hand, from first sketch to launch." />
+    <meta property="og:image" content="/images/work/gl-desktop-lg.webp" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" as="image" href="/images/work/gl-desktop-lg.webp" fetchpriority="high" />
+    <script>
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.dataset.theme = "dark";
+        }
+      } catch (e) {}
+      var root = document.documentElement;
+      root.classList.add("js");
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        root.classList.add("is-intro");
+        setTimeout(function () {
+          if (!window.__intro) root.classList.remove("is-intro");
+        }, 4000);
+      }
+    </script>
+    <script type="module" src="/src/main.js"></script>
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main" class="skip-link">Skip to content</a>
 
-    <header>
-      <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-      <h1>Fabian</h1>
-      <p>Web developer in training — building real projects, one at a time.</p>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
+    <header class="masthead">
+      <a class="masthead__name" href="#top">
+        <span class="masthead__full">Fabian Ghani Affandi</span>
+        <span class="masthead__short" aria-hidden="true">Fabian G. A.</span>
+      </a>
+      <nav class="masthead__nav" aria-label="Sections">
+        <a href="#work">Work</a>
+        <a href="#practice">Practice</a>
         <a href="#contact">Contact</a>
       </nav>
+      <button class="switch" type="button" aria-pressed="false">
+        <svg class="switch__lamp" viewBox="0 0 20 20" aria-hidden="true">
+          <circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5" />
+          <circle class="switch__glow" cx="10" cy="10" r="4.5" />
+        </svg>
+        <span>Darkroom</span>
+      </button>
     </header>
 
-    <main id="main-content">
-      <section id="about">
-        <h2 class="section-title">About</h2>
-        <p>
-          I’m a Web Developer who enjoys learning through new experiences. I’m
-          responsible, willing to learn, and always try to do my best.
-        </p>
-      </section>
+    <main id="main">
+      <!-- First viewport: the easel -->
+      <section class="hero" id="top" aria-labelledby="hero-name">
+        <div class="hero__offer">
+          <p class="hero__lede">Websites, designed and built by hand.</p>
+          <div class="hero__actions">
+            <a class="button" href="#contact">Start a project</a>
+            <a class="textlink" href="#work">See the work</a>
+          </div>
+        </div>
 
-      <section id="projects">
-        <h2 class="section-title">Projects</h2>
-        <div class="project-cards">
-          <article class="card">
-            <h3>Project One</h3>
-            <p>Short description goes here.</p>
-          </article>
-          <article class="card">
-            <h3>Project Two</h3>
-            <p>Short description goes here.</p>
-          </article>
-          <article class="card">
-            <h3>Project Three</h3>
-            <p>Short description goes here.</p>
-          </article>
+        <figure class="hero__print">
+          <div class="easel" aria-hidden="true">
+            <span class="easel__rule easel__rule--top"></span>
+            <span class="easel__rule easel__rule--left"></span>
+          </div>
+          <div class="print print--hero" data-gl data-fit="cover" data-hero>
+            <img
+              src="/images/work/gl-desktop-lg.webp"
+              width="2400"
+              height="1500"
+              alt="The GreenLeaf Cleaning Co. homepage: the headline “Spotless homes, every time” beside a photograph of dune grass by the sea."
+              fetchpriority="high"
+              decoding="async"
+            />
+          </div>
+          <figcaption class="caption">
+            Frame 1. GreenLeaf Cleaning Co., a concept landing page.
+          </figcaption>
+        </figure>
+
+        <h1 class="hero__name" id="hero-name">Fabian Ghani Affandi</h1>
+
+        <div class="hero__strip" aria-hidden="true">
+          <span class="film film--vertical">
+            <span class="film__frame" data-gl data-fit="cover" data-mono>
+              <img src="/images/work/ft-desktop-sm.webp" width="1000" height="750" alt="" loading="lazy" decoding="async" />
+            </span>
+            <span class="film__frame" data-gl data-fit="cover" data-mono>
+              <img src="/images/work/ra-desktop-sm.webp" width="1000" height="750" alt="" loading="lazy" decoding="async" />
+            </span>
+            <span class="film__frame" data-gl data-fit="contain" data-mono>
+              <img src="/images/work/gl-mobile-sm.webp" width="351" height="760" alt="" loading="lazy" decoding="async" />
+            </span>
+          </span>
         </div>
       </section>
 
-      <section id="contact">
-        <h2 class="section-title">Contact</h2>
-        <form
-        id="contact-form"
-        name="contact"
-        method="POST"
-        data-netlify="true"
-        novalidate
-      >
-        <input type="hidden" name="form-name" value="contact" />
-          <div class="form-field">
+      <!-- The contact sheet -->
+      <section class="sheet" id="work" aria-labelledby="sheet-title">
+        <div class="sheet__intro">
+          <h2 class="sheet__title" id="sheet-title">Fourteen frames from three projects</h2>
+          <p class="sheet__how">
+            <span class="for-pointer">Hover a frame to look through the loupe. Select it to see it large, or type its number.</span>
+            <span class="for-touch">Tap a frame to see it large. Swipe along a strip to see the rest of the roll.</span>
+          </p>
+        </div>
+
+        <div class="sheet__stage">
+          <div class="sheet__track" data-gl-clip>
+            <div class="strip" data-project="greenleaf">
+              <p class="strip__label">GreenLeaf Cleaning Co.</p>
+              <ol class="strip__frames" data-gl-clip>
+                <li class="strip__cell">
+                  <button class="frame" type="button" data-frame="1" data-project="greenleaf" data-lg="/images/work/gl-desktop-lg.webp" data-caption="Homepage on desktop, with the quote button top right.">
+                    <span class="frame__media" data-gl data-fit="cover" data-focus-y="1" data-mono><img src="/images/work/gl-desktop-sm.webp" width="1000" height="625" alt="" loading="lazy" decoding="async" /></span>
+                    <span class="visually-hidden">Open frame 1: GreenLeaf homepage on desktop</span>
+                  </button>
+                  <span class="edge">1</span>
+                </li>
+                <li class="strip__cell">
+                  <button class="frame" type="button" data-frame="2" data-project="greenleaf" data-lg="/images/work/gl-services-lg.webp" data-caption="Service cards for regular, deep, and move in or move out cleaning.">
+                    <span class="frame__media" data-gl data-fit="contain" data-mono><img src="/images/work/gl-services-sm.webp" width="1000" height="301" alt="" loading="lazy" decoding="async" /></span>
+                    <span class="visually-hidden">Open frame 2: GreenLeaf service cards</span>
+                  </button>
+                  <span class="edge">2</span>
+                </li>
+                <li class="strip__cell">
+                  <button class="frame" type="button" data-frame="3" data-project="greenleaf" data-lg="/images/work/gl-testimonial-lg.webp" data-caption="The testimonial block, set large and centred.">
+                    <span class="frame__media" data-gl data-fit="contain" data-mono><img src="/images/work/gl-testimonial-sm.webp" width="1000" height="389" alt="" loading="lazy" decoding="async" /></span>
+                    <span class="visually-hidden">Open frame 3: GreenLeaf testimonial</span>
+                  </button>
+                  <span class="edge">3</span>
+                </li>
+                <li class="strip__cell">
+                  <button class="frame" type="button" data-frame="4" data-project="greenleaf" data-lg="/images/work/gl-cta-lg.webp" data-caption="The closing call to action: a free quote in under two minutes.">
+                    <span class="frame__media" data-gl data-fit="contain" data-mono><img src="/images/work/gl-cta-sm.webp" width="1000" height="186" alt="" loading="lazy" decoding="async" /></span>
+                    <span class="visually-hidden">Open frame 4: GreenLeaf call to action</span>
+                  </button>
+                  <span class="edge">4</span>
+                </li>
+                <li class="strip__cell">
+                  <button class="frame" type="button" data-frame="5" data-project="greenleaf" data-lg="/images/work/gl-mobile-lg.webp" data-caption="The homepage on a phone.">
+                    <span class="frame__media" data-gl data-fit="contain" data-mono><img src="/images/work/gl-mobile-sm.webp" width="351" height="760" alt="" loading="lazy" decoding="async" /></span>
+                    <span class="visually-hidden">Open frame 5: GreenLeaf homepage on a phone</span>
+                  </button>
+                  <span class="edge">5</span>
+                </li>
+                <li class="strip__cell is-select">
+                  <button class="frame" type="button" data-frame="6" data-project="greenleaf" data-lg="/images/work/gl-mobile-menu-lg.webp" data-caption="The mobile menu, open.">
+                    <span class="frame__media" data-gl data-fit="contain" data-mono><img src="/images/work/gl-mobile-menu-sm.webp" width="351" height="760" alt="" loading="lazy" decoding="async" /></span>
+                    <span class="visually-hidden">Open frame 6: GreenLeaf mobile menu, open</span>
+                  </button>
+                  <span class="edge">6</span>
+                </li>
+              </ol>
+            </div>
+
+            <div class="strip" data-project="focus-timer">
+              <p class="strip__label">Focus Timer</p>
+              <ol class="strip__frames" data-gl-clip>
+                <li class="strip__cell">
+                  <button class="frame" type="button" data-frame="7" data-project="focus-timer" data-lg="/images/work/ft-desktop-lg.webp" data-caption="Ready to start a twenty-five minute focus session.">
+                    <span class="frame__media" data-gl data-fit="cover" data-mono><img src="/images/work/ft-desktop-sm.webp" width="1000" height="750" alt="" loading="lazy" decoding="async" /></span>
+                    <span class="visually-hidden">Open frame 7: Focus Timer, ready to start</span>
+                  </button>
+                  <span class="edge">7</span>
+                </li>
+                <li class="strip__cell is-select">
+                  <button class="frame" type="button" data-frame="8" data-project="focus-timer" data-lg="/images/work/ft-running-lg.webp" data-caption="Paused three seconds into a session.">
+                    <span class="frame__media" data-gl data-fit="cover" data-mono><img src="/images/work/ft-running-sm.webp" width="1000" height="708" alt="" loading="lazy" decoding="async" /></span>
+                    <span class="visually-hidden">Open frame 8: Focus Timer, paused</span>
+                  </button>
+                  <span class="edge">8</span>
+                </li>
+                <li class="strip__cell">
+                  <button class="frame" type="button" data-frame="9" data-project="focus-timer" data-lg="/images/work/ft-break-lg.webp" data-caption="Short break mode, reset to five minutes.">
+                    <span class="frame__media" data-gl data-fit="cover" data-mono><img src="/images/work/ft-break-sm.webp" width="1000" height="708" alt="" loading="lazy" decoding="async" /></span>
+                    <span class="visually-hidden">Open frame 9: Focus Timer, short break</span>
+                  </button>
+                  <span class="edge">9</span>
+                </li>
+                <li class="strip__cell">
+                  <button class="frame" type="button" data-frame="10" data-project="focus-timer" data-lg="/images/work/ft-mobile-lg.webp" data-caption="The timer on a phone.">
+                    <span class="frame__media" data-gl data-fit="contain" data-mono><img src="/images/work/ft-mobile-sm.webp" width="351" height="760" alt="" loading="lazy" decoding="async" /></span>
+                    <span class="visually-hidden">Open frame 10: Focus Timer on a phone</span>
+                  </button>
+                  <span class="edge">10</span>
+                </li>
+              </ol>
+            </div>
+
+            <div class="strip" data-project="github-app">
+              <p class="strip__label">Profile and skills app</p>
+              <ol class="strip__frames" data-gl-clip>
+                <li class="strip__cell">
+                  <button class="frame" type="button" data-frame="11" data-project="github-app" data-lg="/images/work/ra-desktop-lg.webp" data-caption="A live GitHub profile above the skills list and form.">
+                    <span class="frame__media" data-gl data-fit="cover" data-mono><img src="/images/work/ra-desktop-sm.webp" width="1000" height="750" alt="" loading="lazy" decoding="async" /></span>
+                    <span class="visually-hidden">Open frame 11: Profile and skills app on desktop</span>
+                  </button>
+                  <span class="edge">11</span>
+                </li>
+                <li class="strip__cell">
+                  <button class="frame" type="button" data-frame="12" data-project="github-app" data-lg="/images/work/ra-profile-lg.webp" data-caption="The profile card, filled from the GitHub API.">
+                    <span class="frame__media" data-gl data-fit="contain" data-mono><img src="/images/work/ra-profile-sm.webp" width="1000" height="157" alt="" loading="lazy" decoding="async" /></span>
+                    <span class="visually-hidden">Open frame 12: GitHub profile card</span>
+                  </button>
+                  <span class="edge">12</span>
+                </li>
+                <li class="strip__cell is-select">
+                  <button class="frame" type="button" data-frame="13" data-project="github-app" data-lg="/images/work/ra-skills-lg.webp" data-caption="The skills list after adding GSAP through the form.">
+                    <span class="frame__media" data-gl data-fit="contain" data-mono><img src="/images/work/ra-skills-sm.webp" width="1000" height="367" alt="" loading="lazy" decoding="async" /></span>
+                    <span class="visually-hidden">Open frame 13: skills list with a new skill added</span>
+                  </button>
+                  <span class="edge">13</span>
+                </li>
+                <li class="strip__cell">
+                  <button class="frame" type="button" data-frame="14" data-project="github-app" data-lg="/images/work/ra-mobile-lg.webp" data-caption="The app on a phone.">
+                    <span class="frame__media" data-gl data-fit="contain" data-mono><img src="/images/work/ra-mobile-sm.webp" width="351" height="760" alt="" loading="lazy" decoding="async" /></span>
+                    <span class="visually-hidden">Open frame 14: Profile and skills app on a phone</span>
+                  </button>
+                  <span class="edge">14</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Enlargements -->
+      <article class="spread spread--greenleaf" id="greenleaf" aria-labelledby="greenleaf-title">
+        <div class="spread__lead">
+          <div class="print" data-gl data-fit="cover" data-focus-y="1" data-reveal data-parallax>
+            <img src="/images/work/gl-desktop-lg.webp" width="2400" height="1500" alt="The GreenLeaf homepage on a desktop screen." loading="lazy" decoding="async" />
+          </div>
+        </div>
+        <header class="spread__head">
+          <h2 class="spread__title" id="greenleaf-title">GreenLeaf Cleaning Co.</h2>
+          <p class="deck">
+            A landing page for a home cleaning company that takes a visitor from “who are you?” to “get a
+            quote” in a single scroll.
+          </p>
+          <p class="note">This is a concept project. GreenLeaf is a fictional business.</p>
+        </header>
+        <div class="spread__pair">
+          <div class="print print--phone" data-gl data-fit="cover" data-reveal data-speed="0.92">
+            <img src="/images/work/gl-mobile-lg.webp" width="832" height="1800" alt="The GreenLeaf homepage on a phone." loading="lazy" decoding="async" />
+          </div>
+          <div class="print print--phone print--offset" data-gl data-fit="cover" data-reveal data-speed="1.12">
+            <img src="/images/work/gl-mobile-menu-lg.webp" width="832" height="1800" alt="The GreenLeaf mobile menu, open, listing Services, Testimonials and Contact." loading="lazy" decoding="async" />
+          </div>
+        </div>
+        <dl class="spec">
+          <div><dt>Role</dt><dd>Design and front-end development</dd></div>
+          <div><dt>Built with</dt><dd>React, Tailwind CSS, Vite</dd></div>
+          <div><dt>Includes</dt><dd>Responsive navigation with a mobile menu, service cards, a testimonial and a quote call to action</dd></div>
+        </dl>
+      </article>
+
+      <section class="sequence" id="focus-timer" aria-labelledby="timer-title">
+        <div class="sequence__pin">
+          <div class="sequence__print print" data-gl data-fit="cover" data-sequence>
+            <img src="/images/work/ft-desktop-lg.webp" width="1280" height="960" alt="Focus Timer, ready to start a twenty-five minute session." loading="lazy" decoding="async" />
+            <img src="/images/work/ft-running-lg.webp" width="1152" height="816" alt="Focus Timer, paused at twenty-four minutes fifty-seven seconds." loading="lazy" decoding="async" />
+            <img src="/images/work/ft-break-lg.webp" width="1152" height="816" alt="Focus Timer in short break mode, showing five minutes." loading="lazy" decoding="async" />
+          </div>
+          <div class="sequence__text">
+            <h2 class="spread__title" id="timer-title">Focus Timer</h2>
+            <p class="deck">A Pomodoro timer with three modes and a countdown that never drifts.</p>
+            <ol class="sequence__steps">
+              <li class="is-active"><strong>Focus.</strong> Twenty-five minutes, started with one tap.</li>
+              <li><strong>Pause.</strong> The interval is cleared on every pause, so the clock can never tick twice.</li>
+              <li><strong>Break.</strong> Switching mode resets the clock and stops the timer.</li>
+            </ol>
+            <dl class="spec spec--compact">
+              <div><dt>Built with</dt><dd>React, Tailwind CSS, Vite</dd></div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <article class="spread spread--github" id="github-app" aria-labelledby="github-title">
+        <header class="spread__head">
+          <h2 class="spread__title" id="github-title">Profile and skills app</h2>
+          <p class="deck">
+            A React app that loads a live GitHub profile and keeps a list of skills you can add to.
+          </p>
+        </header>
+        <div class="spread__lead">
+          <div class="print" data-gl data-fit="cover" data-reveal>
+            <img src="/images/work/ra-desktop-lg.webp" width="1600" height="1200" alt="The profile and skills app: a GitHub profile card above four skill cards and an add-skill form." loading="lazy" decoding="async" />
+          </div>
+        </div>
+        <div class="spread__details">
+          <div class="print print--detail" data-gl data-fit="cover" data-reveal data-speed="0.95">
+            <img src="/images/work/ra-profile-lg.webp" width="1644" height="258" alt="The GitHub profile card for fabiannnle." loading="lazy" decoding="async" />
+          </div>
+          <div class="print print--detail" data-gl data-fit="cover" data-reveal data-speed="1.08">
+            <img src="/images/work/ra-skills-lg.webp" width="1692" height="621" alt="Skill cards for HTML, CSS, JavaScript, React and a newly added GSAP." loading="lazy" decoding="async" />
+          </div>
+          <dl class="spec">
+            <div><dt>Built with</dt><dd>React, Tailwind CSS, the GitHub REST API</dd></div>
+            <div><dt>Includes</dt><dd>Live data with loading and error states, controlled form inputs, and a list that re-renders as you add to it</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <section class="colophon" id="this-site" aria-labelledby="site-title">
+        <div class="colophon__text">
+          <h2 class="spread__title" id="site-title">This site</h2>
+          <p class="deck">
+            Designed and built from scratch as a working sample. Every image on this page is drawn in WebGL.
+          </p>
+          <ul class="colophon__list">
+            <li>Three.js shaders for the develop effect, the loupe and the transitions</li>
+            <li>GSAP ScrollTrigger for the pinned contact sheet and the reveals</li>
+            <li>Lenis for smooth scrolling</li>
+            <li>The View Transitions API for the darkroom switch</li>
+            <li>A Vite build, deployed on Netlify</li>
+          </ul>
+        </div>
+        <figure class="teststrip">
+          <div class="teststrip__print print" data-gl data-fit="cover" data-mono data-teststrip>
+            <img src="/images/work/gl-desktop-lg.webp" width="2400" height="1500" alt="A test strip of the GreenLeaf homepage, printed in six bands of increasing exposure." loading="lazy" decoding="async" />
+          </div>
+          <ol class="teststrip__times" aria-hidden="true">
+            <li>2s</li><li>4s</li><li>8s</li><li>16s</li><li>32s</li><li>64s</li>
+          </ol>
+          <figcaption class="teststrip__controls">
+            <label class="range">
+              <span class="range__label">Develop</span>
+              <input type="range" min="0" max="100" value="100" data-develop-control />
+            </label>
+            <span class="caption">Drag to develop the test strip. The darkest tones appear first, just as they do in the tray.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="practice" id="practice" aria-labelledby="practice-title">
+        <h2 class="practice__title" id="practice-title">I design and build websites by hand.</h2>
+        <div class="practice__body">
+          <p>
+            I’m Fabian Ghani Affandi, a web designer and developer. I take a site from the first conversation
+            to launch: structure, typography, motion, code and deployment, all in one pair of hands. That
+            means fewer handoffs, and a site that behaves the way it was designed.
+          </p>
+          <div class="practice__cols">
+            <div>
+              <h3 class="practice__sub">What I make</h3>
+              <ul class="plain-list">
+                <li>Landing pages and marketing sites</li>
+                <li>Portfolio and brand sites</li>
+                <li>Interactive front-ends in React</li>
+                <li>Motion, scroll effects and WebGL</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="practice__sub">How a project runs</h3>
+              <ol class="process">
+                <li><strong>Brief.</strong> We agree what the site needs to do and who it’s for.</li>
+                <li><strong>Design.</strong> Layouts and type, shown in the browser early.</li>
+                <li><strong>Build.</strong> Hand-written code, tested on phones and desktops.</li>
+                <li><strong>Launch.</strong> Deployed, fast, and handed over with notes.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="contact__head">
+          <h2 class="contact__title" id="contact-title">Tell me about your project.</h2>
+          <p>Send a few lines about what you need, and I’ll reply by email.</p>
+        </div>
+        <form class="order" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="visually-hidden"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+          <div class="field">
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" />
-            <span class="error-message" id="name-error"></span>
+            <input type="text" id="name" name="name" autocomplete="name" aria-describedby="name-error" />
+            <p class="field__error" id="name-error" aria-live="polite"></p>
           </div>
-          <div class="form-field">
+          <div class="field">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" />
-            <span class="error-message" id="email-error"></span>
+            <input type="email" id="email" name="email" autocomplete="email" inputmode="email" aria-describedby="email-error" />
+            <p class="field__error" id="email-error" aria-live="polite"></p>
           </div>
-          <div class="form-field">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="4"></textarea>
-            <span class="error-message" id="message-error"></span>
+          <div class="field field--wide">
+            <label for="message">What do you need?</label>
+            <textarea id="message" name="message" rows="6" aria-describedby="message-error"></textarea>
+            <p class="field__error" id="message-error" aria-live="polite"></p>
           </div>
-          <button type="submit">Send</button>
-          <p class="success-message" id="form-success"></p>
+          <div class="order__submit">
+            <button class="button" type="submit">Send enquiry</button>
+            <p class="order__status" id="form-status" role="status" aria-live="polite"></p>
+          </div>
         </form>
       </section>
     </main>
 
-    <footer>
-      <p>&copy; 2026 Fabian</p>
+    <footer class="footer">
+      <p class="footer__edge" aria-hidden="true">FGA 400 &nbsp; 14 &nbsp; end of roll</p>
+      <p>© 2026 Fabian Ghani Affandi</p>
+      <p><a class="textlink" href="https://github.com/fabiannnle" rel="me">GitHub</a></p>
+      <p><a class="textlink" href="#top">Back to top</a></p>
     </footer>
 
-    <script src="js/script.js"></script>
+    <div class="viewer-backdrop" hidden></div>
+    <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="viewer-title" hidden>
+      <div class="viewer__stage">
+        <div class="viewer__print" data-gl-viewer><img src="/images/work/gl-desktop-lg.webp" alt="" /></div>
+      </div>
+      <div class="viewer__info">
+        <h2 class="viewer__title" id="viewer-title"></h2>
+        <p class="viewer__caption"></p>
+        <p class="viewer__count"></p>
+        <a class="textlink viewer__more" href="#">Read about the project</a>
+      </div>
+      <div class="viewer__controls">
+        <button type="button" class="viewer__btn" data-viewer="prev">Previous frame</button>
+        <button type="button" class="viewer__btn" data-viewer="next">Next frame</button>
+        <button type="button" class="viewer__btn viewer__close" data-viewer="close">Close</button>
+      </div>
+    </div>
+
+    <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+    <div class="grain" aria-hidden="true"></div>
   </body>
 </html>
