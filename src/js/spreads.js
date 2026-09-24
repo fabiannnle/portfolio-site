@@ -42,7 +42,7 @@ export function initSpreads({ reduce }) {
   initTestStrip(reduce);
 }
 
-// Focus Timer: one print held on the easel while its states are exposed in turn.
+// The workflow: one print held on the easel while each step is exposed in turn.
 function initSequence(mm, reduce) {
   const print = document.querySelector("[data-sequence]");
   const m = mediaOf(print);
@@ -86,7 +86,8 @@ function initSequence(mm, reduce) {
         ScrollTrigger.create({
           trigger: ".sequence__pin",
           start: "top top",
-          end: "+=180%",
+          // About 60% of a screen of scrolling per step.
+          end: `+=${steps.length * 60}%`,
           pin: true,
           onUpdate: (self) => go(Math.min(steps.length - 1, Math.floor(self.progress * steps.length))),
         });

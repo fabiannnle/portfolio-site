@@ -58,7 +58,7 @@ initForm();
 initMenu({ lock: lockScroll, reduce });
 initMasthead();
 
-// Past the hero the masthead gets a paper band, and it steps aside while you read downward.
+// Once anything scrolls under it, the masthead gets a paper band, and it steps aside while you read downward.
 function initMasthead() {
   const head = document.querySelector(".masthead");
   let last = window.scrollY;
@@ -68,7 +68,7 @@ function initMasthead() {
       last = y;
       return;
     }
-    const banded = y > window.innerHeight * 0.8;
+    const banded = y > 40;
     head.classList.toggle("is-banded", banded);
     if (!banded || y < last - 4) head.classList.remove("is-hidden");
     else if (y > last + 4 && !head.contains(document.activeElement)) head.classList.add("is-hidden");
