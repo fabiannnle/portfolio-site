@@ -29,8 +29,6 @@ uniform float uShift;
 uniform vec3 uPaper;
 uniform vec3 uEdgeA;
 uniform vec3 uEdgeB;
-uniform vec3 uTint;
-uniform float uRoom;
 uniform vec2 uFocus;
 uniform vec3 uRing;
 
@@ -122,12 +120,10 @@ void main() {
     col = sampleImg(suv);
   }
 
-  // Silver gelatin: monochrome with a gentle toe and shoulder, tinted by the room's light.
+  // Silver gelatin: neutral monochrome with a gentle toe and shoulder. Prints look the same in either theme.
   float lum = dot(col, vec3(0.2126, 0.7152, 0.0722));
-  vec3 silver = vec3(smoothstep(0.02, 0.98, lum)) * uTint;
-  // Colour prints take the room's light too, except inside the loupe.
-  vec3 roomCol = mix(col, col * uTint, uRoom * (1.0 - lens));
-  vec3 c = mix(silver, roomCol, max(1.0 - uMono, lens));
+  vec3 silver = vec3(smoothstep(0.02, 0.98, lum));
+  vec3 c = mix(silver, col, max(1.0 - uMono, lens));
 
   // Test strip: six bands, each exposed twice as long as the last.
   if (uBands > 0.5) {

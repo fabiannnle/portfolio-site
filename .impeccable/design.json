@@ -397,7 +397,7 @@
       {
         "name": "develop-arrival",
         "value": "2.2s power1.inOut, stagger 0.07s, once at top 75%",
-        "purpose": "Contact-sheet frames and the pinned sequence print developing on arrival."
+        "purpose": "Contact-sheet frames and each sequence print developing on arrival."
       },
       {
         "name": "enlargement-reveal",
@@ -411,13 +411,8 @@
       },
       {
         "name": "pencil-draw",
-        "value": "drawSVG 0 to 100%, 1.2 to 1.3s power2.inOut; erase 0.6s",
+        "value": "drawSVG 0 to 100%, 1.2 to 1.3s power2.inOut",
         "purpose": "Grease pencil drawing itself around selects."
-      },
-      {
-        "name": "sheet-pan",
-        "value": "pin, scrub 1, end +=1.35 x longest travel; each strip x to -travel, track y to -dy",
-        "purpose": "Pinned contact sheet panning under scroll, 900px+ with full motion."
       },
       {
         "name": "dissolve",
@@ -464,12 +459,7 @@
       {
         "name": "stack",
         "value": "899px",
-        "note": "max-width: single column, no easel or hero strip, static sheet, unpinned sequence, 56px header"
-      },
-      {
-        "name": "pan",
-        "value": "900px",
-        "note": "min-width: pinned sheet pan and pinned sequence (with no-preference motion)"
+        "note": "max-width: single column, no easel or hero strip, sequence stacks title, print, arrows, steps, 56px header"
       },
       {
         "name": "rebalance",
@@ -504,10 +494,6 @@
       {
         "name": "uHover/uMouse/uLens/uMag",
         "purpose": "Loupe: 1.9x (1.8x viewer), radius 26% of frame width clamped 64 to 120px (150px viewer), rim chromatic aberration, --ink ring, 7% hush outside, true colour inside."
-      },
-      {
-        "name": "uTint/uRoom",
-        "purpose": "Safelight: tint (1, 0.88, 0.76) and room 0.6 in dark theme; light theme (1,1,1) and 0. Loupe interior exempt."
       },
       {
         "name": "uMono",
@@ -608,7 +594,7 @@
   ],
   "narrative": {
     "northStar": "The Contact Sheet",
-    "overview": "The site is a photo editor's light table. Every screenshot of the work is a frame on a roll of film: it sits in silver monochrome on the contact sheet, shows true colour under a loupe, gets circled in grease pencil when it is a select, and is printed large as an enlargement. The same room is lit two ways. By day it is a light table of cool baryta paper and fixer-black ink. By night it is a warm darkroom under an amber safelight. The layout does not change between them. Only the light does.\n\nDensity is editorial and unhurried. Large Bodoni Moda headlines sit at weight 400 with optical sizing, and Archivo carries every working word. Space comes from a 12-column grid with one fluid gutter and tall vh-based section breathing room. Depth comes only from overlap and parallax speed. The name overlaps the print, the film strip overlaps the margin, and prints drift at different rates. Nothing is lifted by a blurred shadow. Every image on the page goes through one WebGL print pipeline that develops it shadows-first, clips it like an easel blade, loupes it, tints it for the room, and dissolves it into the next frame.\n\nMotion has one orchestrated moment: the easel opens on the first print. Everything after that is tied to scroll or to the visitor's hand. Prints develop as they arrive, grease pencil draws itself around selects, and the contact sheet pins and pans.",
+    "overview": "The site is a photo editor's light table. Every screenshot of the work is a frame on a roll of film: it sits in silver monochrome on the contact sheet, shows true colour under a loupe, gets circled in grease pencil when it is a select, and is printed large as an enlargement. The same room is lit two ways. By day it is a light table of cool baryta paper and fixer-black ink. By night it is a warm darkroom. The layout does not change between them, and neither do the prints: frames and enlargements look the same in both themes, so only the page around them changes.\n\nDensity is editorial and unhurried. Large Bodoni Moda headlines sit at weight 400 with optical sizing, and Archivo carries every working word. Space comes from a 12-column grid with one fluid gutter and tall vh-based section breathing room. Depth comes only from overlap and parallax speed. The name overlaps the print, the film strip overlaps the margin, and prints drift at different rates. Nothing is lifted by a blurred shadow. Every image on the page goes through one WebGL print pipeline that develops it shadows-first, clips it like an easel blade, loupes it, and dissolves it into the next frame.\n\nMotion has one orchestrated moment: the easel opens on the first print. Everything after that is tied to scroll or to the visitor's hand. Prints develop as they arrive, grease pencil draws itself around selects, and the workflows step forward only when the visitor presses an arrow.",
     "keyCharacteristics": [
       "Two rooms, one layout: light-table tokens by default, darkroom tokens under `[data-theme=\"dark\"]`.",
       "Monochrome frames that gain colour only under the loupe or when enlarged.",
@@ -625,7 +611,7 @@
       },
       {
         "name": "The Two Rooms Rule",
-        "body": "A theme is a change of light, not of layout. The dark theme swaps only the custom properties and sets the shader's safelight tint (RGB 1, 0.88, 0.76 with room strength 0.6). Components never branch on theme.",
+        "body": "A theme is a change of light, not of layout. The dark theme swaps only the custom properties. The prints themselves are never tinted by the theme. Components never branch on theme.",
         "section": "colors"
       },
       {

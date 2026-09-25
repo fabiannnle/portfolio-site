@@ -133,9 +133,9 @@ components:
 
 **Creative North Star: "The Contact Sheet"**
 
-The site is a photo editor's light table. Every screenshot of the work is a frame on a roll of film: it sits in silver monochrome on the contact sheet, shows true colour under a loupe, gets circled in grease pencil when it is a select, and is printed large as an enlargement. The same room is lit two ways. By day it is a light table of cool baryta paper and fixer-black ink. By night it is a warm darkroom under an amber safelight. The layout does not change between them. Only the light does.
+The site is a photo editor's light table. Every screenshot of the work is a frame on a roll of film: it sits in silver monochrome on the contact sheet, shows true colour under a loupe, gets circled in grease pencil when it is a select, and is printed large as an enlargement. The same room is lit two ways. By day it is a light table of cool baryta paper and fixer-black ink. By night it is a warm darkroom. The layout does not change between them, and neither do the prints: frames and enlargements look the same in both themes, so only the page around them changes.
 
-Density is editorial and unhurried. Large Bodoni Moda headlines sit at weight 400 with optical sizing, and Archivo carries every working word. Space comes from a 12-column grid with one fluid gutter and tall vh-based section breathing room. Depth comes only from overlap and parallax speed. The name overlaps the print, the film strip overlaps the margin, and prints drift at different rates. Nothing is lifted by a blurred shadow. Every image on the page goes through one WebGL print pipeline that develops it shadows-first, clips it like an easel blade, loupes it, tints it for the room, and dissolves it into the next frame.
+Density is editorial and unhurried. Large Bodoni Moda headlines sit at weight 400 with optical sizing, and Archivo carries every working word. Space comes from a 12-column grid with one fluid gutter and tall vh-based section breathing room. Depth comes only from overlap and parallax speed. The name overlaps the print, the film strip overlaps the margin, and prints drift at different rates. Nothing is lifted by a blurred shadow. Every image on the page goes through one WebGL print pipeline that develops it shadows-first, clips it like an easel blade, loupes it, and dissolves it into the next frame.
 
 Motion has one orchestrated moment: the introduction sets itself line by line and a reel of frames develops beneath it. Everything after that is tied to scroll or to the visitor's hand. Prints develop as they arrive, grease pencil draws around the selects, and each contact-sheet strip steps along with its own arrows.
 
@@ -157,7 +157,7 @@ The palette is neutral silver and paper with one chemical accent that changes wi
 
 ### Neutral: the light table
 - **Baryta Paper** (`paper`): the page, the masthead band and the viewer backdrop. The WebGL shader reads it too, so developing prints rise out of the page colour itself.
-- **Light-Table Sheet** (`sheet`): the contact-sheet surface under the pinned strips, one step brighter than the page. It is also the colour of the sprocket holes in the light theme.
+- **Light-Table Sheet** (`sheet`): the contact-sheet surface under the strips, one step brighter than the page. It is also the colour of the sprocket holes in the light theme.
 - **Fixer Ink** (`ink`): all primary text, the solid button, the cursor label, the range track and the loupe's barrel ring.
 - **Silver Midtone** (`ink-soft`): secondary text, captions, strip labels, spec terms, inactive sequence steps and field underlines at rest.
 - **Hairline** (`rule`): every 1px divider. That covers spec and list tops, the footer top, the banded masthead's bottom rule, the sheet's outline and link underlines at rest.
@@ -172,7 +172,7 @@ The palette is neutral silver and paper with one chemical accent that changes wi
 ### Named Rules
 **The Grease Pencil Rule.** `mark` and `safelight` mean "this one" or "you are here": selects, focus, errors and the active step. They never fill a surface, colour a heading or decorate.
 
-**The Two Rooms Rule.** A theme is a change of light, not of layout. The dark theme swaps only the custom properties and sets the shader's safelight tint (RGB 1, 0.88, 0.76 with room strength 0.6). Components never branch on theme.
+**The Two Rooms Rule.** A theme is a change of light, not of layout. The dark theme swaps only the custom properties. The prints themselves are never tinted by the theme (the user found a theme-tinted print odd, 2026-09-25). Components never branch on theme.
 
 **The Silver Until Loupe'd Rule.** Frames on the contact sheet and on the film strip are silver-gelatin monochrome. Colour arrives only inside the loupe, when a frame is enlarged in the viewer, or in the full-colour enlargements.
 
@@ -202,13 +202,13 @@ The palette is neutral silver and paper with one chemical accent that changes wi
 
 ## Layout
 
-A 12-column grid (`repeat(12, minmax(0, 1fr))`) with a single fluid `gutter` token as both column gap and page margin. The hero, sheet intro, spreads, sequence, colophon, practice and contact all use this grid. Placement is deliberately asymmetric. In the hero the offer takes columns 1 to 4 and the print 5 to 12. The Aldergrove Hours head takes 1 to 7 with its spec at 9 to 12. The workflow sequence print takes 1 to 7 with the text at 9 to 12. The role rows alternate a print (7 columns) with text (4 columns), and the build section puts the facts at 1 to 7 beside the payslip PDF at 9 to 12. The contact head takes 1 to 5 with the form at 7 to 12.
+A 12-column grid (`repeat(12, minmax(0, 1fr))`) with a single fluid `gutter` token as both column gap and page margin. The hero, sheet intro, spreads, sequence, colophon, practice and contact all use this grid. Placement is deliberately asymmetric. In the hero the offer takes columns 1 to 4 and the print 5 to 12. Each case-study head (`.spread--case`: Pasar Malam, then Aldergrove Hours) takes 1 to 7 with its spec at 9 to 12. Each workflow sequence print takes 1 to 7 with the text and its step arrows at 9 to 12. The role rows alternate a print (7 columns) with text (4 columns), and the build section puts the facts at 1 to 7 beside the payslip PDF at 9 to 12. The Pasar Malam kitchen section (`.spread--kitchen`) instead runs its board screenshot full width (`.build__wide`) with the facts in three columns beneath. The contact head takes 1 to 5 with the form at 7 to 12.
 
 Vertical rhythm comes from vh, not fixed pixels: `section` top padding of 22vh (16vh below 900px), 18vh before the sheet and the sequence, and 24vh / 16vh around contact. Component gaps come from a short pixel set: 6, 16, 24, 28 and 48px.
 
 The masthead is fixed at `header` height (64px, 56px below 900px). Full-height sections pad their tops by the header plus a few vh.
 
-Breakpoints: at 1100px the hero lede and the sequence columns rebalance. At 899px everything stacks to full width, the header drops to 56px, and the workflow sequence stops pinning. At 520px the masthead shortens the name to "Fabian G. A." and hides the switch label. Contact-sheet frames scale with clamp(120px, min(29vh, 52vw), 290px), so a frame always fits a phone screen.
+Breakpoints: at 1100px the hero lede and the sequence columns rebalance. At 899px everything stacks to full width, the header drops to 56px, and each workflow sequence stacks as title, print, arrows, then steps, so the print changing stays in view. At 520px the masthead shortens the name to "Fabian G. A." and hides the switch label. Contact-sheet frames scale with clamp(120px, min(29vh, 52vw), 290px), so a frame always fits a phone screen.
 
 ## Elevation & Depth
 
@@ -270,7 +270,6 @@ Every image with `data-gl` is a print: a DOM image that keeps its space and alt 
 - **Develop** (`uDevelop` 0 to 1): tones come up from paper, the darkest first and the highlights last, through a noise threshold.
 - **Clip** (`uClip` t/r/b/l): easel blades crop the print from any edge. **Clip bounds** (`uBounds`) stop a print at every `data-gl-clip` ancestor, so frames never paint outside the sheet or the strip.
 - **Loupe** (`uHover`, `uMouse`, `uLens`, `uMag`): a circular lens magnifies 1.9× (1.8× in the viewer). On the sheet its radius is 26% of the frame width, clamped to 64 to 120px, and it is 150px in the viewer. It has slight chromatic aberration at the rim and a thin ring in `ink`, darkens the print outside the lens by 7%, and shows full colour inside. The cursor label "Open frame N" rides beside it.
-- **Safelight room tint** (`uTint`, `uRoom`): in the darkroom, monochrome prints take the amber tint and colour prints take 60% of it, except inside the loupe.
 - **Dissolve** (`uMix`): one print gives way to the next through soft noise, washing toward paper at the seam. It is used for the sequence steps and for moving between frames in the viewer.
 - **Focus** (`uFocus`, from `data-focus-y`): a cover-fit print holds its top edge (or another chosen edge) as it crops.
 - **Bow:** the plane bends slightly with scroll speed (clamped to ±40), like paper lifted off the easel. It is off under reduced motion.
@@ -282,12 +281,13 @@ Every image with `data-gl` is a print: a DOM image that keeps its space and alt 
 ### Motion grammar
 - **Introduction (the only orchestrated moment):** the intro's lines rise out of line masks (1.4s `expo.out`, 0.12s stagger). The lede, actions and masthead fade in from 0.7s, and the reel's frames develop in sequence from 0.9s. On scroll the reel drifts left by 18% of the viewport width.
 - **Prints developing:** the frames on the sheet develop once on arrival (2.2s, 0.07s stagger). Each enlargement's blade lifts from the top while it settles from 12% over-zoom and develops, all scrubbed across the band from 96% to 55% of the viewport.
-- **Grease pencil drawing itself:** `drawSVG` from 0 to 100% over 1.2 to 1.3s with `power2.inOut` as a select enters. On the pinned sheet a mark erases in 0.6s when its frame pans back out.
+- **Grease pencil drawing itself:** `drawSVG` from 0 to 100% over 1.2 to 1.3s with `power2.inOut` as a select enters. 
+- **Workflow steppers:** nothing on the page pins or holds the scroll. Each `.sequence` has previous and next arrows (the strip arrow style), a live "2 of 5" count, clickable steps and arrow-key support. A step change dissolves the print to the next screenshot (1.1s `power2.inOut`, 0s under reduced motion).
 - **Contact sheet strips:** each strip is a horizontal scroll-snap roll. Its previous and next arrows step one frame at a time with smooth scrolling (instant under reduced motion) and disable at either end. Each strip develops as it enters view, then its select is marked.
 - **House ease:** `cubic-bezier(0.16, 1, 0.3, 1)` for CSS state changes. Lenis smooth scroll at a lerp of 0.09.
 
 ### Fallbacks
-- **Reduced motion:** no Lenis and no intro. Prints are developed and marks are drawn from the start. The sheet becomes horizontally scroll-snapped strips, the sequence stacks with the dissolve at 0s, the grain stops, the theme switch has no reveal, and CSS transitions are cut to 0.01ms.
+- **Reduced motion:** no Lenis and no intro. Prints are developed and marks are drawn from the start. The sheet becomes horizontally scroll-snapped strips, the sequence dissolve runs at 0s, the grain stops, the theme switch has no reveal, and CSS transitions are cut to 0.01ms.
 - **No WebGL** (or `?nogl`): the DOM images stay visible. A CSS stand-in reproduces clip as `clip-path: inset()`, develop as brightness and contrast, and zoom and shift as transforms. Monochrome frames use `grayscale(1) contrast(1.06)` and turn colour on hover instead of under a loupe.
 - **Phones (below 900px):** the sheet is static, with swipeable strips at a `--frame-h` of `min(44vw, 30vh)`. The instructions change from "Hover" to "Tap" and "Swipe".
 
@@ -297,7 +297,7 @@ Every image with `data-gl` is a print: a DOM image that keeps its space and alt 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** route every new image through the print pipeline (`data-gl`, with `data-fit`, and `data-mono` for frames) so it develops, clips, loupes and takes the room's light like the rest.
+- **Do** route every new image through the print pipeline (`data-gl`, with `data-fit`, and `data-mono` for frames) so it develops, clips and loupes like the rest.
 - **Do** keep `mark` / `safelight` to selection, focus, error and active state. Pair it with a shape (tick, underline, box) so colour is never the only signal.
 - **Do** lay out on the 12-column grid with the single `gutter` token, and place content asymmetrically.
 - **Do** make depth by overlap and parallax speed. Keep dividers to 1px `rule` hairlines.
