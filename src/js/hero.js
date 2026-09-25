@@ -23,7 +23,8 @@ export async function initHero({ reduce }) {
   reelMedias.forEach((m) => (m.develop = 0));
 
   await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1200))]);
-  const split = SplitText.create(intro, { type: "lines", mask: "lines" });
+  // Split on plain spaces only, so a non-breaking space keeps "web apps." on one line.
+  const split = SplitText.create(intro, { type: "lines", mask: "lines", wordDelimiter: " ", reduceWhiteSpace: false });
   gsap.set(split.lines, { yPercent: 105 });
   gsap.set([more, stack, masthead], { opacity: 0 });
   root.classList.remove("is-intro");
