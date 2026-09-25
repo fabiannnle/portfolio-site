@@ -13,9 +13,9 @@ Audience: prospective clients who need a website. Job: judge Fabian's craft in s
 
 ## Direction contract
 
-THESIS: The portfolio is a photo editor's contact sheet. Every screen of Fabian's work is a frame on a roll: selects are circled in grease pencil and printed large, and a loupe reveals true colour. This refuses the category default of a project-card grid under a big name.
+THESIS: The portfolio is a photo editor's contact sheet. Every screen of Fabian's work is a frame on a roll: selects are circled in grease pencil and printed large, and a loupe magnifies them. Each project is one strip. This refuses the category default of a project-card grid under a big name.
 
-OWN-WORLD: The light table by day is cool baryta paper white (#F3F3F0), silver midtones and fixer black ink. The darkroom by night is a warm dark (#1A1411). Prints are never tinted by the theme. Grease pencil (#D2462A, safelight amber in dark mode) marks selection only. Bodoni Moda set at its optical sizes provides the magazine voice. Archivo's width axis carries the text and the film-edge codes. Frames appear as silver monochrome and gain colour under the loupe or when enlarged. Depth comes from overlap only, with no shadows. Film grain stays at a fixed screen size.
+OWN-WORLD: The light table by day is cool baryta paper white (#F3F3F0), silver midtones and fixer black ink. The darkroom by night is a warm dark (#1A1411). Prints are never tinted by the theme. Grease pencil (#D2462A, safelight amber in dark mode) marks selection only. Bodoni Moda set at its optical sizes provides the magazine voice. Archivo's width axis carries the text and the film-edge codes. Frames show the projects in their real colours. Depth comes from overlap only, with no shadows. Film grain stays at a fixed screen size.
 
 STORY: Visitors see a print develop, recognise real interfaces as film frames, loupe and open them, read what each project does and how it was built, understand that this site is itself the demonstration, and leave an enquiry.
 

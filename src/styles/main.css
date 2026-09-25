@@ -404,10 +404,6 @@ button {
   background: var(--ground);
 }
 
-[data-mono] img {
-  filter: grayscale(1) contrast(1.06);
-}
-
 /* WebGL draws the images; the DOM copies keep their space and stay for screen readers. */
 .gl-on [data-gl] img,
 .gl-on [data-gl-viewer] img {
@@ -1638,9 +1634,11 @@ canvas.stage {
   margin-top: 6px;
 }
 
+/* Level with the title, clear of the bottom-right corner where Netlify's badge sits. */
 .viewer__controls {
   display: flex;
-  align-items: end;
+  align-items: start;
+  align-self: start;
   gap: 24px;
 }
 
@@ -1722,11 +1720,6 @@ canvas.stage {
 .js.is-intro .hero__stack,
 .js.is-intro .masthead {
   opacity: 0;
-}
-
-/* Without WebGL the loupe becomes a plain colour reveal. */
-html:not(.gl-on) .frame:hover [data-mono] img {
-  filter: none;
 }
 
 /* ---------- Responsive ---------- */
@@ -1908,10 +1901,12 @@ html:not(.gl-on) .frame:hover [data-mono] img {
 
   .viewer {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr auto auto;
+    grid-template-rows: auto 1fr auto;
+    padding-bottom: max(3vh, 64px);
   }
 
   .viewer__controls {
+    order: -1;
     justify-content: space-between;
   }
 }
