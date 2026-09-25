@@ -17,9 +17,6 @@ import {
 import { gsap } from "gsap";
 import { vertex, fragment } from "./shaders.js";
 
-const TINT_LIGHT = [1, 1, 1];
-const TINT_DARK = [1, 0.88, 0.76];
-
 function readColor(name) {
   const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   return new Color(value);
@@ -54,12 +51,10 @@ export function createStage(medias) {
   const shared = {
     uPaper: { value: new Color() },
     uGround: { value: new Color() },
-    uTint: { value: new Color(...TINT_LIGHT) },
     uRing: { value: new Color() },
     uTime: { value: 0 },
     uDpr: { value: dpr },
     uVel: { value: 0 },
-    uRoom: { value: 0 },
   };
   const pageAlpha = { value: 1 };
   const viewerAlpha = { value: 1 };
@@ -186,12 +181,9 @@ export function createStage(medias) {
   window.addEventListener("resize", resize);
 
   function setTheme() {
-    const dark = document.documentElement.dataset.theme === "dark";
     shared.uPaper.value.copy(readColor("--paper"));
     shared.uGround.value.copy(readColor("--ground"));
     shared.uRing.value.copy(readColor("--ink"));
-    shared.uTint.value.setRGB(...(dark ? TINT_DARK : TINT_LIGHT));
-    shared.uRoom.value = dark ? 0.6 : 0;
   }
   setTheme();
 

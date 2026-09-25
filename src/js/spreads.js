@@ -38,71 +38,72 @@ export function initSpreads({ reduce }) {
     });
   });
 
-  initSequence(mm, reduce);
+  initSequences(reduce);
   initTestStrip(reduce);
 }
 
-// The workflow: one print held on the easel while each step is exposed in turn.
-function initSequence(mm, reduce) {
-  const print = document.querySelector("[data-sequence]");
-  const m = mediaOf(print);
-  const steps = [...document.querySelectorAll(".sequence__steps li")];
-  let current = 0;
+// The workflows: one print held on the easel, and the visitor steps through it with the arrows or the list.
+// Nothing is pinned, so the page always scrolls freely.
+function initSequences(reduce) {
+  document.querySelectorAll(".sequence").forEach((section) => {
+    const print = section.querySelector("[data-sequence]");
+    const m = mediaOf(print);
+    const items = [...section.querySelectorAll(".sequence__steps li")];
+    const buttons = items.map((li) => li.querySelector(".sequence__step"));
+    const [prev, next] = section.querySelectorAll("[data-seq-step]");
+    const counter = section.querySelector("[data-seq-current]");
+    let current = 0;
 
-  const go = (next) => {
-    if (next === current) return;
-    steps.forEach((li, i) => li.classList.toggle("is-active", i === next));
-    print.dataset.step = String(next);
-    gsap.killTweensOf(m, "mix");
-    m.texA = current;
-    m.texB = next;
-    m.mix = 0;
-    current = next;
-    gsap.to(m, {
-      mix: 1,
-      duration: reduce ? 0 : 1.1,
-      ease: "power2.inOut",
-      onComplete: () => {
-        m.texA = next;
-        m.mix = 0;
-      },
+    const sync = () => {
+      items.forEach((li, i) => li.classList.toggle("is-active", i === current));
+      buttons.forEach((b, i) => b.setAttribute("aria-pressed", String(i === current)));
+      print.dataset.step = String(current);
+      counter.textContent = String(current + 1);
+      prev.disabled = current === 0;
+      next.disabled = current === items.length - 1;
+    };
+
+    const go = (to) => {
+      const target = Math.max(0, Math.min(items.length - 1, to));
+      if (target === current) return;
+      gsap.killTweensOf(m, "mix");
+      m.texA = current;
+      m.texB = target;
+      m.mix = 0;
+      current = target;
+      sync();
+      gsap.to(m, {
+        mix: 1,
+        duration: reduce ? 0 : 1.1,
+        ease: "power2.inOut",
+        onComplete: () => {
+          m.texA = target;
+          m.mix = 0;
+        },
+      });
+    };
+
+    buttons.forEach((b, i) => b.addEventListener("click", () => go(i)));
+    prev.addEventListener("click", () => go(current - 1));
+    next.addEventListener("click", () => go(current + 1));
+    section.addEventListener("keydown", (e) => {
+      if (e.target.closest("input, textarea")) return;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") go(current + 1);
+      else if (e.key === "ArrowLeft" || e.key === "ArrowUp") go(current - 1);
+      else return;
+      e.preventDefault();
     });
-  };
+    sync();
 
-  mm.add(
-    {
-      pin: "(min-width: 900px) and (prefers-reduced-motion: no-preference)",
-      stack: "(max-width: 899px), (prefers-reduced-motion: reduce)",
-    },
-    (context) => {
-      if (context.conditions.pin) {
-        m.develop = 0;
-        ScrollTrigger.create({
-          trigger: print,
-          start: "top 80%",
-          once: true,
-          onEnter: () => gsap.to(m, { develop: 1, duration: 2.2, ease: "power1.inOut" }),
-        });
-        ScrollTrigger.create({
-          trigger: ".sequence__pin",
-          start: "top top",
-          // About 60% of a screen of scrolling per step.
-          end: `+=${steps.length * 60}%`,
-          pin: true,
-          onUpdate: (self) => go(Math.min(steps.length - 1, Math.floor(self.progress * steps.length))),
-        });
-      } else {
-        steps.forEach((li, i) =>
-          ScrollTrigger.create({
-            trigger: li,
-            start: "top 65%",
-            end: "bottom 65%",
-            onToggle: (self) => self.isActive && go(i),
-          }),
-        );
-      }
-    },
-  );
+    if (reduce) return;
+    m.develop = 0;
+    ScrollTrigger.create({
+      trigger: print,
+      start: "top 80%",
+      once: true,
+      onEnter: () => gsap.to(m, { develop: 1, duration: 2.2, ease: "power1.inOut" }),
+    });
+  });
 }
 
 // This site: a test strip the visitor can develop by hand.
