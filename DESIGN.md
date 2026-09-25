@@ -133,7 +133,7 @@ components:
 
 **Creative North Star: "The Contact Sheet"**
 
-The site is a photo editor's light table. Every screenshot of the work is a frame on a roll of film: it sits in silver monochrome on the contact sheet, shows true colour under a loupe, gets circled in grease pencil when it is a select, and is printed large as an enlargement. The same room is lit two ways. By day it is a light table of cool baryta paper and fixer-black ink. By night it is a warm darkroom. The layout does not change between them, and neither do the prints: frames and enlargements look the same in both themes, so only the page around them changes.
+The site is a photo editor's light table. Every screenshot of the work is a frame on a roll of film: it sits on the contact sheet in the project's own colours, is magnified under a loupe, gets circled in grease pencil when it is a select, and is printed large as an enlargement. The same room is lit two ways. By day it is a light table of cool baryta paper and fixer-black ink. By night it is a warm darkroom. The layout does not change between them, and neither do the prints: frames and enlargements look the same in both themes, so only the page around them changes.
 
 Density is editorial and unhurried. Large Bodoni Moda headlines sit at weight 400 with optical sizing, and Archivo carries every working word. Space comes from a 12-column grid with one fluid gutter and tall vh-based section breathing room. Depth comes only from overlap and parallax speed. The name overlaps the print, the film strip overlaps the margin, and prints drift at different rates. Nothing is lifted by a blurred shadow. Every image on the page goes through one WebGL print pipeline that develops it shadows-first, clips it like an easel blade, loupes it, and dissolves it into the next frame.
 
@@ -141,7 +141,7 @@ Motion has one orchestrated moment: the introduction sets itself line by line an
 
 **Key Characteristics:**
 - Two rooms, one layout: light-table tokens by default, darkroom tokens under `[data-theme="dark"]`.
-- Monochrome frames that gain colour only under the loupe or when enlarged.
+- Frames in the projects' real colours (the user asked for no black and white, 2026-09-25).
 - Grease pencil is the single accent, and it marks selection and attention only.
 - Square corners everywhere. Hairline rules, film black, sprocket holes.
 - Bodoni Moda for voice, Archivo for work, and Archivo's condensed width for film-edge codes.
@@ -174,7 +174,7 @@ The palette is neutral silver and paper with one chemical accent that changes wi
 
 **The Two Rooms Rule.** A theme is a change of light, not of layout. The dark theme swaps only the custom properties. The prints themselves are never tinted by the theme (the user found a theme-tinted print odd, 2026-09-25). Components never branch on theme.
 
-**The Silver Until Loupe'd Rule.** Frames on the contact sheet and on the film strip are silver-gelatin monochrome. Colour arrives only inside the loupe, when a frame is enlarged in the viewer, or in the full-colour enlargements.
+**The True Colour Rule.** Every frame, reel frame and print shows the project in its real colours, in both themes. The pipeline's `data-mono` option stays available but is not used (user request, 2026-09-25).
 
 ## Typography
 
@@ -288,7 +288,7 @@ Every image with `data-gl` is a print: a DOM image that keeps its space and alt 
 
 ### Fallbacks
 - **Reduced motion:** no Lenis and no intro. Prints are developed and marks are drawn from the start. The sheet becomes horizontally scroll-snapped strips, the sequence dissolve runs at 0s, the grain stops, the theme switch has no reveal, and CSS transitions are cut to 0.01ms.
-- **No WebGL** (or `?nogl`): the DOM images stay visible. A CSS stand-in reproduces clip as `clip-path: inset()`, develop as brightness and contrast, and zoom and shift as transforms. Monochrome frames use `grayscale(1) contrast(1.06)` and turn colour on hover instead of under a loupe.
+- **No WebGL** (or `?nogl`): the DOM images stay visible. A CSS stand-in reproduces clip as `clip-path: inset()`, develop as brightness and contrast, and zoom and shift as transforms.
 - **Phones (below 900px):** the sheet is static, with swipeable strips at a `--frame-h` of `min(44vw, 30vh)`. The instructions change from "Hover" to "Tap" and "Swipe".
 
 - **Tools list** (`.hero__stack`, `.stack`): a definition list in the first viewport, set in the same hairline-row grammar as the project specs. Terms are ink-soft at 0.9375rem, values are ink, and each row is bordered top and bottom by `rule`. It lists only tools used in the shipped work, with no proficiency bars or levels.
@@ -297,7 +297,7 @@ Every image with `data-gl` is a print: a DOM image that keeps its space and alt 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** route every new image through the print pipeline (`data-gl`, with `data-fit`, and `data-mono` for frames) so it develops, clips and loupes like the rest.
+- **Do** route every new image through the print pipeline (`data-gl`, with `data-fit`) so it develops, clips and loupes like the rest.
 - **Do** keep `mark` / `safelight` to selection, focus, error and active state. Pair it with a shape (tick, underline, box) so colour is never the only signal.
 - **Do** lay out on the 12-column grid with the single `gutter` token, and place content asymmetrically.
 - **Do** make depth by overlap and parallax speed. Keep dividers to 1px `rule` hairlines.
